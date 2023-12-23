@@ -5,11 +5,13 @@ const searchButton = document.getElementById("search-button");
 const searchResult = document.getElementById("search-result");
 let books = [];
 
-function caricaLibri() {
+async function caricaLibri() {
   while (searchResult.firstChild) {
     searchResult.removeChild(searchResult.firstChild);
   }
-  fetch(`https://openlibrary.org/subjects/${input.value}.json?`)
+  await fetch(
+    `https://openlibrary.org/subjects/${input.value.toLowerCase()}.json?`,
+  )
     .then((response) => response.json())
     .then((data) => {
       data.works.forEach((element, i) => {
@@ -25,20 +27,34 @@ function caricaLibri() {
             coverId: element.cover_id,
           });
       });
-
-      books.forEach((book) => {
-        findDescription(book);
-        // createCard(book);
-      });
     });
 }
 
-function createCard(book) {
+async function findDescription(book) {
+  await fetch(`https://openlibrary.org${book.key}.json`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (typeof data.description == "string") {
+        book.description = data.description;
+      } else if (
+        typeof data.description == "object" &&
+        data.description !== undefined
+      ) {
+        book.description = data.description.value;
+      } else {
+        book.description = "no description found";
+      }
+    });
+}
+
+async function createCard(book) {
+  await findDescription(book);
   const card = document.createElement("div");
   card.className = ` m-4 grid grid-cols-2 cursor-pointer items-center rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl sm:text-sm`;
   const img = document.createElement("img");
   img.className = `h-48 w-32 rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-s-lg `;
   img.src = `https://covers.openlibrary.org/b/id/${book.coverId}-M.jpg`;
+  img.alt = `${book.title}`;
   const textDiv = document.createElement("div");
   textDiv.classList = `flex flex-col justify-between p-3 leading-normal`;
   const title = document.createElement("h3");
@@ -55,8 +71,9 @@ function createCard(book) {
   publishYear.textContent = `${book.year}`;
   const description = document.createElement("div");
   description.className =
-    "w-max-screen flex col-span-2 justify-center item-center hidden transition-all text-xs text-balance p-2 break-normal";
+    "col-span-2 break-words text-wrap text-justify hidden transition-all text-xs p-2 text-balance";
   const descriptionText = document.createElement("p");
+  descriptionText.className = "text-balance";
   descriptionText.textContent = `${book.description}`;
   searchResult.appendChild(card);
   card.appendChild(img);
@@ -70,33 +87,29 @@ function createCard(book) {
   card.addEventListener("click", () => {
     if (description.classList.contains("hidden")) {
       description.classList.remove("hidden");
+      description.classList.remove("scale-x-0");
     } else {
       description.classList.add("hidden");
+      description.classList.add("scale-x-0");
     }
   });
 }
 
-function findDescription(book) {
-  fetch(`https://openlibrary.org${book.key}.json`)
-    .then((response) => response.json())
-    .then((data) => {
-      if (typeof data.description == "string") {
-        book.description = data.description;
-      } else if (
-        typeof data.description == "object" &&
-        data.description !== undefined
-      ) {
-        book.description = data.description.value;
-      } else {
-        book.description = "no description found";
-      }
-    });
-}
-
-searchButton.addEventListener("click", (e) => {
+searchButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  caricaLibri();
-  books.forEach((book) => {
-    createCard(book);
-  });
+  console.log("Clicked searchButton");
+
+  try {
+    await caricaLibri();
+    console.log("caricaLibri completed");
+
+    // Verifica se books contiene dati
+    console.log("books:", books);
+    console.log("createCards called");
+    books.forEach((book) => {
+      createCard(book);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
 });
