@@ -596,8 +596,8 @@ function caricaLibri() {
             };
         });
         books.forEach((book)=>{
-            createCard(book);
-            console.log(book);
+            findDescription(book);
+        // createCard(book);
         });
     });
 }
@@ -618,26 +618,37 @@ function createCard(book) {
     authors.classList = "font-semibold text-base";
     const publishYear = document.createElement("h5");
     publishYear.textContent = `${book.year}`;
+    const description = document.createElement("div");
+    description.className = "w-max-screen flex col-span-2 justify-center item-center hidden transition-all text-xs text-balance p-2 break-normal";
+    const descriptionText = document.createElement("p");
+    descriptionText.textContent = `${book.description}`;
     searchResult.appendChild(card);
     card.appendChild(img);
     card.appendChild(textDiv);
     textDiv.appendChild(title);
     textDiv.appendChild(authors);
     textDiv.appendChild(publishYear);
-    card.addEventListener("click", (e)=>{
-        const description = document.createElement("div");
-        description.className = "flex col-span-2 justify-center item-center";
-        description.textContent = "ciao";
-        if (card.lastChild == description) card.remove(lastChild);
-        else card.appendChild(description);
-        if (card != e.target) description.innerHTML = "";
+    card.appendChild(description);
+    description.appendChild(descriptionText);
+    card.addEventListener("click", ()=>{
+        if (description.classList.contains("hidden")) description.classList.remove("hidden");
+        else description.classList.add("hidden");
+    });
+}
+function findDescription(book) {
+    fetch(`https://openlibrary.org${book.key}.json`).then((response)=>response.json()).then((data)=>{
+        if (typeof data.description == "string") book.description = data.description;
+        else if (typeof data.description == "object" && data.description !== undefined) book.description = data.description.value;
+        else book.description = "no description found";
     });
 }
 searchButton.addEventListener("click", (e)=>{
     e.preventDefault();
     caricaLibri();
+    books.forEach((book)=>{
+        createCard(book);
+    });
 });
-caricaLibri();
 
 },{"39694f42130126b0":"3qBDj"}],"3qBDj":[function(require,module,exports) {
 var global = arguments[3];

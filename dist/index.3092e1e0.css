@@ -278,16 +278,6 @@ img, video {
   bottom: .5rem;
 }
 
-.inset-y-2\.5 {
-  top: .625rem;
-  bottom: .625rem;
-}
-
-.inset-y-3 {
-  top: .75rem;
-  bottom: .75rem;
-}
-
 .end-2 {
   inset-inline-end: .5rem;
 }
@@ -337,6 +327,10 @@ img, video {
   display: none;
 }
 
+.h-48 {
+  height: 12rem;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -350,16 +344,12 @@ img, video {
   height: 100%;
 }
 
-.h-40 {
-  height: 10rem;
-}
-
-.h-48 {
-  height: 12rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-32 {
+  width: 8rem;
 }
 
 .w-5\/6 {
@@ -380,27 +370,6 @@ img, video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.w-20 {
-  width: 5rem;
-}
-
-.w-24 {
-  width: 6rem;
-}
-
-.w-36 {
-  width: 9rem;
-}
-
-.w-32 {
-  width: 8rem;
 }
 
 .cursor-pointer {
@@ -429,6 +398,11 @@ img, video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.break-normal {
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .rounded-lg {
@@ -482,12 +456,12 @@ img, video {
   object-fit: cover;
 }
 
-.p-3 {
-  padding: .75rem;
+.p-2 {
+  padding: .5rem;
 }
 
-.p-3\.5 {
-  padding: .875rem;
+.p-3 {
+  padding: .75rem;
 }
 
 .px-2 {
@@ -513,11 +487,6 @@ img, video {
   line-height: 2rem;
 }
 
-.text-sm {
-  font-size: .875rem;
-  line-height: 1.25rem;
-}
-
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -526,6 +495,16 @@ img, video {
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-sm {
+  font-size: .875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: .75rem;
+  line-height: 1rem;
 }
 
 .font-bold {
@@ -579,6 +558,12 @@ img, video {
   --tw-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.transition-all {
+  transition-property: all;
+  transition-duration: .15s;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
 html {
