@@ -575,14 +575,18 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"dV6cC":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var _alertSvg = require("/src/img/alert.svg");
+var _alertSvgDefault = parcelHelpers.interopDefault(_alertSvg);
 const _ = require("39694f42130126b0");
 const input = document.getElementById("default-search");
 const searchButton = document.getElementById("search-button");
 const searchResult = document.getElementById("search-result");
 let books = [];
 async function caricaLibri() {
+    books = [];
     while(searchResult.firstChild)searchResult.removeChild(searchResult.firstChild);
-    await fetch(`https://openlibrary.org/subjects/${input.value.toLowerCase()}.json?`).then((response)=>response.json()).then((data)=>{
+    await fetch(`https://openlibrary.org/subjects/${input.value.toLowerCase()}.json?limit=18`).then((response)=>response.json()).then((data)=>{
         data.works.forEach((element, i)=>{
             let authors = [];
             element.authors.forEach((author)=>{
@@ -648,22 +652,39 @@ async function createCard(book) {
 }
 searchButton.addEventListener("click", async (e)=>{
     e.preventDefault();
-    console.log("Clicked searchButton");
     try {
+        var loader = document.getElementById("loader");
+        loader.style.display = "block";
         await caricaLibri();
-        console.log("caricaLibri completed");
-        // Verifica se books contiene dati
-        console.log("books:", books);
-        console.log("createCards called");
-        books.forEach((book)=>{
+        loader.style.display = "none";
+        if (books.length == 0) displayError();
+        else books.forEach((book)=>{
             createCard(book);
         });
     } catch (error) {
-        console.error("Error:", error);
+        loader.style.display = "none";
+        displayError();
     }
 });
+function displayError() {
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "mt-20 flex w-40 flex-col items-center justify-center md:w-56";
+    const errorImg = document.createElement("img");
+    errorImg.src = (0, _alertSvgDefault.default);
+    const errorText = document.createElement("h1");
+    errorText.textContent = "Nessun libro trovato";
+    errorText.className = "whitespace-nowrap text-xl font-bold md:text-2xl";
+    searchResult.appendChild(errorDiv);
+    errorDiv.appendChild(errorImg);
+    errorDiv.appendChild(errorText);
+}
+document.onreadystatechange = function() {
+    var loader = document.getElementById("loader");
+    if (document.readyState === "complete") loader.style.display = "none"; // Nasconde l'indicatore quando il caricamento è completato
+    else loader.style.display = "block"; // Mostra l'indicatore mentre la pagina sta caricando
+};
 
-},{"39694f42130126b0":"3qBDj"}],"3qBDj":[function(require,module,exports) {
+},{"39694f42130126b0":"3qBDj","/src/img/alert.svg":"iRn6N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3qBDj":[function(require,module,exports) {
 var global = arguments[3];
 (function() {
     /** Used as a safe reference for `undefined` in pre-ES5 environments. */ var undefined;
@@ -14894,6 +14915,74 @@ var global = arguments[3];
     } else // Export to the global object.
     root._ = _;
 }).call(this);
+
+},{}],"iRn6N":[function(require,module,exports) {
+module.exports = require("218256cab26673cf").getBundleURL("2MSMO") + "alert.76b80e5b.svg" + "?" + Date.now();
+
+},{"218256cab26673cf":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["4FFYD","dV6cC"], "dV6cC", "parcelRequire4451")
 

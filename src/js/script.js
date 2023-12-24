@@ -1,4 +1,5 @@
 const _ = require("lodash");
+import errorImgSrc from "/src/img/alert.svg";
 
 const input = document.getElementById("default-search");
 const searchButton = document.getElementById("search-button");
@@ -6,11 +7,12 @@ const searchResult = document.getElementById("search-result");
 let books = [];
 
 async function caricaLibri() {
+  books = [];
   while (searchResult.firstChild) {
     searchResult.removeChild(searchResult.firstChild);
   }
   await fetch(
-    `https://openlibrary.org/subjects/${input.value.toLowerCase()}.json?`,
+    `https://openlibrary.org/subjects/${input.value.toLowerCase()}.json?limit=18`,
   )
     .then((response) => response.json())
     .then((data) => {
@@ -97,19 +99,44 @@ async function createCard(book) {
 
 searchButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  console.log("Clicked searchButton");
 
   try {
+    var loader = document.getElementById("loader");
+    loader.style.display = "block";
     await caricaLibri();
-    console.log("caricaLibri completed");
-
-    // Verifica se books contiene dati
-    console.log("books:", books);
-    console.log("createCards called");
-    books.forEach((book) => {
-      createCard(book);
-    });
+    loader.style.display = "none";
+    if (books.length == 0) {
+      displayError();
+    } else {
+      books.forEach((book) => {
+        createCard(book);
+      });
+    }
   } catch (error) {
-    console.error("Error:", error);
+    loader.style.display = "none";
+    displayError();
   }
 });
+
+function displayError() {
+  const errorDiv = document.createElement("div");
+  errorDiv.className =
+    "mt-20 flex w-40 flex-col items-center justify-center md:w-56";
+  const errorImg = document.createElement("img");
+  errorImg.src = errorImgSrc;
+  const errorText = document.createElement("h1");
+  errorText.textContent = "Nessun libro trovato";
+  errorText.className = "whitespace-nowrap text-xl font-bold md:text-2xl";
+  searchResult.appendChild(errorDiv);
+  errorDiv.appendChild(errorImg);
+  errorDiv.appendChild(errorText);
+}
+
+document.onreadystatechange = function () {
+  var loader = document.getElementById("loader");
+  if (document.readyState === "complete") {
+    loader.style.display = "none"; // Nasconde l'indicatore quando il caricamento è completato
+  } else {
+    loader.style.display = "block"; // Mostra l'indicatore mentre la pagina sta caricando
+  }
+};
