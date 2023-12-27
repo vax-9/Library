@@ -2,7 +2,10 @@
 
 > Cant't find the book to read? This is for you!
 
-<img src="src/img/screenshot.png" align='center' width="400px" >
+<p align="center">
+    <img src="src/img/screenshot.png" align='center' width="400px" alt="screenshot" >
+</p>
+
 
 ## Key Feature
 
