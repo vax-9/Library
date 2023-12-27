@@ -2,7 +2,7 @@
 
 > Cant't find the book to read? This is for you!
 
-<img src="src/img/screenshot.png" width="400px" >
+<img src="src/img/screenshot.png" align='center' width="400px" >
 
 ## Key Feature
 
@@ -16,7 +16,7 @@
 ## How to use
 
 <ol>
-  <li><strong>Access the Application:</strong> Visit the link [https://library-giuseppe-vassallo.netlify.app/](https://library-giuseppe-vassallo.netlify.app/) to access the application.</li>
+  <li><strong>Access the Application:</strong> Visit the link https://library-giuseppe-vassallo.netlify.app/ to access the application.</li>
   <li><strong>Enter the Category:</strong> Type in the category of books you're interested in within the provided field.</li>
   <li><strong>Retrive Results:</strong> Hit the search or submit button to display the list of the most famous books in the entered category.</li>
   <li><strong>Explore and Select:</strong> Browse through the results and click on each book for further details or additional information..</li>
