@@ -30,11 +30,18 @@
 - [![HTML][html.com]][Html-url]
 - [![CSS][css.com]][css-url]
 - [![Javascript][Javascript.com]][Javascript-url]
-- [![Tailwindcss][Tailwindcss.com]][Tailwindcss-url]
-- [![Parcel][Parcel.com]][{Parcel}-url]
 
 ## Developer
 
 Giuseppe Vassallo – www.linkedin.com/in/giuseppe-vassallo-a24885291 –
 
 try the app! [https://library-giuseppe-vassallo.netlify.app/](https://library-giuseppe-vassallo.netlify.app/)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[Javascript.com]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
+[Javascript-url]: https://javascript.com/
+[html.com]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
+[html-url]: https://www.w3.org
+[css.com]: https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
+[css-url]: https://www.w3.org
