@@ -1,4 +1,3 @@
-const _ = require("lodash");
 import errorImgSrc from "/src/img/alert.svg";
 
 const input = document.getElementById("default-search");
@@ -6,6 +5,7 @@ const searchButton = document.getElementById("search-button");
 const searchResult = document.getElementById("search-result");
 let books = [];
 
+//fetch dei libri e modifica dell'array 'books'
 async function caricaLibri() {
   books = [];
   while (searchResult.firstChild) {
@@ -32,6 +32,7 @@ async function caricaLibri() {
     });
 }
 
+//fetch delle descrizioni dei libri
 async function findDescription(book) {
   await fetch(`https://openlibrary.org${book.key}.json`)
     .then((response) => response.json())
@@ -49,6 +50,7 @@ async function findDescription(book) {
     });
 }
 
+//funzione che crea le card dei libri
 async function createCard(book) {
   await findDescription(book);
   const card = document.createElement("div");
@@ -86,6 +88,7 @@ async function createCard(book) {
   card.appendChild(description);
   description.appendChild(descriptionText);
 
+  //event listener per ogni card che mostra la descrizione sul click
   card.addEventListener("click", () => {
     if (description.classList.contains("hidden")) {
       description.classList.remove("hidden");
@@ -95,11 +98,12 @@ async function createCard(book) {
   });
 }
 
+//event listener sul bottone 'search'
 searchButton.addEventListener("click", async (e) => {
   e.preventDefault();
 
   try {
-    var loader = document.getElementById("loader");
+    const loader = document.getElementById("loader");
     loader.style.display = "block";
     await caricaLibri();
     loader.style.display = "none";
@@ -116,6 +120,7 @@ searchButton.addEventListener("click", async (e) => {
   }
 });
 
+// Funzione che mostra il simbolo di errore con la relativa scritta
 function displayError() {
   const errorDiv = document.createElement("div");
   errorDiv.className =
@@ -129,12 +134,3 @@ function displayError() {
   errorDiv.appendChild(errorImg);
   errorDiv.appendChild(errorText);
 }
-
-document.onreadystatechange = function () {
-  var loader = document.getElementById("loader");
-  if (document.readyState === "complete") {
-    loader.style.display = "none"; // Nasconde l'indicatore quando il caricamento è completato
-  } else {
-    loader.style.display = "block"; // Mostra l'indicatore mentre la pagina sta caricando
-  }
-};
