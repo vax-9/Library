@@ -1,4 +1,4 @@
-# Life Counter
+# Web Library
 
 > Cant't find the book to read? This is for you!
 
@@ -25,7 +25,7 @@
   <li><strong>Explore and Select:</strong> Browse through the results and click on each book for further details or additional information..</li>
 </ol>
 
-### Built With
+## Built With
 
 - [![HTML][html.com]][Html-url]
 - [![CSS][css.com]][css-url]
