@@ -124,7 +124,7 @@ searchButton.addEventListener("click", async (e) => {
 function displayError() {
   const errorDiv = document.createElement("div");
   errorDiv.className =
-    "mt-20 flex w-40 flex-col items-center justify-center md:w-56 lg:col-span-2";
+    "my-20 flex w-40 flex-col items-center justify-center md:w-56 lg:col-span-2";
   const errorImg = document.createElement("img");
   errorImg.src = errorImgSrc;
   const errorText = document.createElement("h1");
