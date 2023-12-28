@@ -56,11 +56,11 @@ async function createCard(book) {
   const card = document.createElement("div");
   card.className = ` m-4 grid grid-cols-2 cursor-pointer items-center rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl sm:text-sm`;
   const img = document.createElement("img");
-  img.className = `h-48 w-32 rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-s-lg `;
+  img.className = `h-48 w-32 rounded-l-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-s-lg `;
   img.src = `https://covers.openlibrary.org/b/id/${book.coverId}-M.jpg`;
   img.alt = `${book.title}`;
   const textDiv = document.createElement("div");
-  textDiv.classList = `flex flex-col justify-between p-3 leading-normal`;
+  textDiv.classList = `flex flex-col justify-between p-3 leading-normal dark:text-gray-200`;
   const title = document.createElement("h3");
   title.textContent = `${book.title}`;
   title.classList = "font-bold text-lg";
@@ -75,7 +75,7 @@ async function createCard(book) {
   publishYear.textContent = `${book.year}`;
   const description = document.createElement("div");
   description.className =
-    "col-span-2 break-words text-wrap text-justify hidden transition-all text-xs p-2 text-balance";
+    "col-span-2 break-words text-wrap text-justify hidden transition-all text-xs p-2 text-balance dark:text-gray-200";
   const descriptionText = document.createElement("p");
   descriptionText.className = "text-balance";
   descriptionText.textContent = `${book.description}`;
