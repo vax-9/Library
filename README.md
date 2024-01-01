@@ -36,6 +36,7 @@
 Giuseppe Vassallo – www.linkedin.com/in/giuseppe-vassallo-a24885291 –
 
 try the app! [https://library-giuseppe-vassallo.netlify.app/](https://library-giuseppe-vassallo.netlify.app/)
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b1c2e932-36bd-4eaf-b04c-e8dd0d76a44e/deploy-status)](https://app.netlify.com/sites/library-giuseppe-vassallo/deploys)
 
 <!-- MARKDOWN LINKS & IMAGES -->
