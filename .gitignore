@@ -1,0 +1,11 @@
+# Ignora la cartella parcel-cache
+.parcel-cache/
+
+# Ignora la cartella dist
+dist/
+
+# Ignora la cartella node_modules
+node_modules/
+
+# Ignora i file di sistema 
+.DS_Store
