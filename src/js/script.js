@@ -134,6 +134,6 @@ function displayError() {
   const errorText = document.createElement("h1");
   errorText.textContent = "Nessun libro trovato";
   errorText.className = "whitespace-nowrap text-xl font-bold md:text-2xl";
-  searchResult.appendChild(errorDiv);
   errorDiv.appendChild(errorText);
+  searchResult.appendChild(errorDiv);
 }
