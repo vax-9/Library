@@ -3,11 +3,10 @@ import errorImgSrc from "/src/img/alert.svg";
 const input = document.getElementById("default-search");
 const searchButton = document.getElementById("search-button");
 const searchResult = document.getElementById("search-result");
-let books = [];
 
 //fetch dei libri e modifica dell'array 'books'
 async function caricaLibri() {
-  books = [];
+  let books = [];
   while (searchResult.firstChild) {
     searchResult.removeChild(searchResult.firstChild);
   }
@@ -30,6 +29,7 @@ async function caricaLibri() {
           });
       });
     });
+  return books;
 }
 
 //fetch delle descrizioni dei libri
@@ -99,25 +99,28 @@ async function createCard(book) {
 }
 
 //event listener sul bottone 'search'
-searchButton.addEventListener("click", async (e) => {
+searchButton.addEventListener("click", (e) => {
   e.preventDefault();
-
-  try {
-    const loader = document.getElementById("loader");
-    loader.style.display = "block";
-    await caricaLibri();
-    loader.style.display = "none";
-    if (books.length == 0) {
-      displayError();
-    } else {
-      books.forEach((book) => {
-        createCard(book);
-      });
-    }
-  } catch (error) {
-    loader.style.display = "none";
-    displayError();
-  }
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  caricaLibri()
+    .then(
+      (books) => (
+        (loader.style.display = "none"),
+        books.length == 0
+          ? displayError()
+          : books.forEach((book) => {
+              createCard(book);
+            })
+      ),
+    )
+    .catch(
+      (err) => (
+        (loader.style.display = "none"),
+        displayError(),
+        console.error("Errore nel caricamento dei libri", err)
+      ),
+    );
 });
 
 // Funzione che mostra il simbolo di errore con la relativa scritta
