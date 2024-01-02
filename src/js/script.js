@@ -130,10 +130,10 @@ function displayError() {
     "my-20 flex w-40 flex-col items-center justify-center md:w-56 lg:col-span-2";
   const errorImg = document.createElement("img");
   errorImg.src = errorImgSrc;
+  errorDiv.appendChild(errorImg);
   const errorText = document.createElement("h1");
   errorText.textContent = "Nessun libro trovato";
   errorText.className = "whitespace-nowrap text-xl font-bold md:text-2xl";
   searchResult.appendChild(errorDiv);
-  errorDiv.appendChild(errorImg);
   errorDiv.appendChild(errorText);
 }
