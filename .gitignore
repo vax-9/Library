@@ -6,3 +6,6 @@ node_modules/
 
 # Ignora i file di sistema 
 .DS_Store
+
+#ignora la cartella dist
+dist
