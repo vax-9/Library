@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build src/index.html --public-url ./",
-    "publish": "parcel build src/index.html --dist-dir build"
+    "publish": "parcel build src/index.html --dist-dir build --public-url ./"
   },
   "keywords": [],
   "author": "",
